@@ -161,12 +161,7 @@ export default function Home() {
                       </p>
                     </div>
                      {/* Value Proposition Item 5 */}
-                     <div className="flex items-center gap-3 px-2 py-1 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
-                      <div className="text-xl">✅</div>
-                      <p className="text-sm text-gray-300 leading-relaxed">
-                        이 강의의 하나로 평생 써먹는 스킬 확보
-                      </p>
-                    </div>
+                    
                   </div>
                 </div>
 
@@ -181,7 +176,7 @@ export default function Home() {
                 </div>
 
                 {/* Discount Call to Action Area */}
-                <div className="w-full -mt-[0.5px] sm:mt-0 pt-0 flex flex-col items-center px-4 sm:px-0 sticky bottom-0 py-0 sm:py-4 -mt-3 sm:mt-0">
+                <div className="w-full -mt-[0.5px] sm:mt-0 pt-0 flex flex-col items-center px- sm:px-0 sticky bottom-0 py-0 sm:py-4 -mt-3 sm:mt-0">
                  
                   <Link
                     href="/reservation"
@@ -212,7 +207,7 @@ export default function Home() {
         </div>
 
         {/* Course Progress Section - Moved below Hero */}
-        <div className="py-16 sm:py-24 px-4 bg-gray-800/50 flex flex-col items-center">
+        <div className="py-6 sm:py-24 px-4 bg-gray-800/50 flex flex-col items-center">
            <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500 drop-shadow-md">
              강의 제작률 <span className="text-white">80% 완료!</span>
            </h3>
