@@ -127,7 +127,7 @@ export default function Home() {
                 )}
 
                 {/* Value Proposition Section - Moved inside Timer Container */}
-                <div className="w-full mt-4 pt-4 sm:mt-8 sm:pt-8 border-t border-white/20">
+                <div className="w-full mt-0 pt-3 sm:mt-8 sm:pt-8 border-t border-white/20">
                   <h3 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-teal-400 drop-shadow-md">
                     이 강의의 하나로, 여러분이 얻는 건?
                   </h3>
@@ -170,27 +170,29 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Course Value and Discount Info */}
-                <div className="w-full mt-0 pt-3 border-t border-white/20 text-center">
-                  
-                  <p className="text-lg sm:text-xl text-gray-300 mb-2 leading-relaxed">
+                {/* Course Value and Discount Info (Actual Value Line Remains) */}
+                <div className="w-full mt-0 pt-0 sm:pt-3 text-center">
+                  <p className="text-lg sm:text-xl text-gray-300 mb-0 leading-relaxed">
                     이 강의의 실제 가치: <span className="font-bold text-white">860,000원</span>
                   </p>
-                  <p className="text-2xl sm:text-3xl font-extrabold text-green-400 leading-relaxed">
-                    지금 <span className="text-yellow-300">6월 1일 전</span> 사전 예약 시
-                    <span className="block sm:inline-block mt-2 sm:mt-0 ml-0 sm:ml-4 text-purple-400">→ <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">160,000원</span> (80% 할인)</span>
+                   <p className="text-xl sm:text-2xl font-bold text-green-400 mb-0 sm:mb-4 drop-shadow-md">
+                     지금 <span className="text-yellow-300">6월 1일 전</span> 사전 예약 시
                   </p>
                 </div>
 
-                {/* CTA Button - Moved inside Timer Container */}
-                <div className="w-full mt-3 pt-5 border-t border-white/20 flex justify-center px-4 sm:px-0 sticky bottom-0 bg-gray-800/70 backdrop-blur-lg py-4">
-                  <Link 
+                {/* Discount Call to Action Area */}
+                <div className="w-full mt-0 pt-0 flex flex-col items-center px-4 sm:px-0 sticky bottom-0 py-0 sm:py-4 -mt-3 sm:mt-0">
+                 
+                  <Link
                     href="/reservation"
-                    className="inline-block w-full sm:w-auto bg-gradient-to-r from-purple-600 to-blue-600 text-white px-12 sm:px-16 py-5 sm:py-6 rounded-full text-lg sm:text-xl font-bold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-purple-500/40 hover:shadow-purple-500/50 text-center tracking-wide relative overflow-hidden group"
+                    className="inline-block w-full sm:w-auto bg-gradient-to-r from-purple-600 to-blue-600 text-white px-12 sm:px-16 py-5 sm:py-6 rounded-full font-bold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-purple-500/40 hover:shadow-purple-500/50 text-center tracking-wide relative overflow-hidden group"
                   >
                     <div className="flex flex-col items-center">
-                      <span>지금 바로 사전예약하기</span>
-                      <span className="text-sm text-white/80 mt-1">6월 1일 전까지 80%할인, 16만원! </span>
+                      <span className="text-2xl sm:text-3xl font-extrabold mb-1">
+                          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-blue-300 drop-shadow-md">160,000원</span> <span className="text-base sm:text-lg font-bold text-white/90">(80% 할인)</span>
+                      </span>
+                      <span className="text-sm sm:text-base text-white/90">지금 바로 사전예약하기</span>
+                      
                       <div className="flex items-center gap-2 mt-2">
                         <div className="relative">
                           <div className={`w-2 h-2 rounded-full ${isPulsing ? 'bg-red-500 animate-pulse' : 'bg-red-500'} shadow-md shadow-red-500/50`}></div>
