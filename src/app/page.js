@@ -96,7 +96,7 @@ export default function Home() {
                     <div className={`w-5 h-5 rounded-full ${isPulsing ? 'bg-purple-500 animate-pulse' : 'bg-purple-500'} shadow-lg shadow-purple-500/50`}></div>
                     <div className="absolute inset-0 rounded-full animate-ping bg-purple-500/30"></div>
                   </div>
-                  <span className="text-lg sm:text-xl text-white font-semibold uppercase tracking-wider">80% 할인 마감까지</span>
+                  <span className="text-sm sm:text-xl text-white font-semibold uppercase tracking-wider">80% 할인 마감까지</span>
                 </div>
                 
                 {isTimeUp ? (
@@ -128,40 +128,40 @@ export default function Home() {
 
                 {/* Value Proposition Section - Moved inside Timer Container */}
                 <div className="w-full mt-4 pt-4 sm:mt-8 sm:pt-8 border-t border-white/20">
-                  <h3 className="text-xl sm:text-2xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-teal-400 drop-shadow-md">
+                  <h3 className="text-xl sm:text-2xl font-bold text-center mb-5 sm:mb-8 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-teal-400 drop-shadow-md">
                     이 강의의 하나로, 여러분이 얻는 건?
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
                     {/* Value Proposition Item 1 */}
-                    <div className="flex items-start gap-3 p-2 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
+                    <div className="flex items-center gap-3 p-2 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
                       <div className="text-xl">✅</div>
                       <p className="text-sm text-gray-300 leading-relaxed">
                         AI로 코딩 1도 몰라도 웹사이트 만들기
                       </p>
                     </div>
                     {/* Value Proposition Item 2 */}
-                    <div className="flex items-start gap-3 p-2 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
+                    <div className="flex items-center gap-3 p-2 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
                       <div className="text-xl">✅</div>
                       <p className="text-sm text-gray-300 leading-relaxed">
                         숨고 / 크몽에서 1건에 100~200만 원 수익화
                       </p>
                     </div>
                     {/* Value Proposition Item 3 */}
-                    <div className="flex items-start gap-3 p-2 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
+                    <div className="flex items-center gap-3 p-2 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
                       <div className="text-xl">✅</div>
                       <p className="text-sm text-gray-300 leading-relaxed">
                         프리랜서 계약, 견적, 배포까지 A to Z 전부 포함
                       </p>
                     </div>
                      {/* Value Proposition Item 4 */}
-                     <div className="flex items-start gap-3 p-2 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
+                     <div className="flex items-center gap-3 p-2 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
                       <div className="text-xl">✅</div>
                       <p className="text-sm text-gray-300 leading-relaxed">
-                        실제 제가 1년간 시행착오로 겪은 노하우 직접 전수
+                        실제 1년간 시행착오로 겪은 노하우 직접 전수
                       </p>
                     </div>
                      {/* Value Proposition Item 5 */}
-                     <div className="flex items-start gap-3 p-2 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
+                     <div className="flex items-center gap-3 p-2 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
                       <div className="text-xl">✅</div>
                       <p className="text-sm text-gray-300 leading-relaxed">
                         강의의 하나로 평생 써먹는 스킬 확보
