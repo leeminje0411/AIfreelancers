@@ -181,11 +181,11 @@ export default function Home() {
                 </div>
 
                 {/* Discount Call to Action Area */}
-                <div className="w-full mt-0 pt-0 flex flex-col items-center px-4 sm:px-0 sticky bottom-0 py-0 sm:py-4 -mt-3 sm:mt-0">
+                <div className="w-full -mt-[0.5px] sm:mt-0 pt-0 flex flex-col items-center px-4 sm:px-0 sticky bottom-0 py-0 sm:py-4 -mt-3 sm:mt-0">
                  
                   <Link
                     href="/reservation"
-                    className="inline-block w-full sm:w-auto bg-gradient-to-r from-purple-600 to-blue-600 text-white px-12 sm:px-16 py-5 sm:py-6 rounded-full font-bold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-purple-500/40 hover:shadow-purple-500/50 text-center tracking-wide relative overflow-hidden group"
+                    className="inline-block w-full sm:w-auto bg-gradient-to-r from-purple-600 to-blue-600 text-white px-12 sm:px-16 py-2 sm:py-5 rounded-full font-bold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-purple-500/40 hover:shadow-purple-500/50 text-center tracking-wide relative overflow-hidden group"
                   >
                     <div className="flex flex-col items-center">
                       <span className="text-2xl sm:text-3xl font-extrabold mb-1">
