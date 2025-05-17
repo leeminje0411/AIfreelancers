@@ -78,18 +78,18 @@ export default function Home() {
     <div className="min-h-screen bg-gray-900 text-white overflow-hidden">
       <div className="relative z-10">
         {/* Hero Section */}
-        <div className="relative pt-8 pb-2 sm:pt-14 sm:pb-6 px-4">
+        <div className="relative pt-5 pb-2 sm:pt-14 sm:pb-6 px-4">
           {/* Background Image and Overlay */}
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97')] bg-cover bg-center opacity-40"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-purple-800/70 to-blue-800/70"></div> {/* Gradient overlay */}
           <div className="relative z-20 max-w-7xl mx-auto text-center">
-            <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 sm:mb-5 bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-blue-300 leading-tight drop-shadow-lg">
+            <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-0 sm:mb-5 bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-blue-300 leading-tight drop-shadow-lg">
               AI로 완성하는<br />수익 창출 웹사이트 강의
             </h1>
         
 
             {/* Discount Timer */}
-            <div className="w-full max-w-5xl mx-auto mt-5 p-4 sm:p-5 bg-gray-800/70 rounded-3xl backdrop-blur-lg border border-purple-500/30 shadow-xl shadow-purple-500/10">
+            <div className="w-full max-w-5xl mx-auto mt-2 sm:mt-5 p-4 sm:p-5 bg-gray-800/70 rounded-3xl backdrop-blur-lg border border-purple-500/30 shadow-xl shadow-purple-500/10">
               <div className="flex flex-col items-center gap-4">
                 <div className="flex items-center gap-4 bg-white/10 px-4 py-2 rounded-full border border-white/20">
                   <div className="relative">
@@ -133,35 +133,35 @@ export default function Home() {
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
                     {/* Value Proposition Item 1 */}
-                    <div className="flex items-center gap-3 p-2 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
+                    <div className="flex items-center gap-3 px-2 py-1 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
                       <div className="text-xl">✅</div>
                       <p className="text-sm text-gray-300 leading-relaxed">
                         AI로 코딩 1도 몰라도 웹사이트 만들기
                       </p>
                     </div>
                     {/* Value Proposition Item 2 */}
-                    <div className="flex items-center gap-3 p-2 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
+                    <div className="flex items-center gap-3 px-2 py-1 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
                       <div className="text-xl">✅</div>
                       <p className="text-sm text-gray-300 leading-relaxed">
                         숨고에서 한달에 100~400만 원 수익화
                       </p>
                     </div>
                     {/* Value Proposition Item 3 */}
-                    <div className="flex items-center gap-3 p-2 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
+                    <div className="flex items-center gap-3 px-2 py-1 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
                       <div className="text-xl">✅</div>
                       <p className="text-sm text-gray-300 leading-relaxed">
-                        프리랜서 계약서 양식 등  A to Z 전부 포함
+                        프리랜서 계약서 양식 등 A to Z 전부 포함
                       </p>
                     </div>
                      {/* Value Proposition Item 4 */}
-                     <div className="flex items-center gap-3 p-2 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
+                     <div className="flex items-center gap-3 px-2 py-1 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
                       <div className="text-xl">✅</div>
                       <p className="text-sm text-gray-300 leading-relaxed">
                         실제 1년간 시행착오로 겪은 노하우 직접 전수
                       </p>
                     </div>
                      {/* Value Proposition Item 5 */}
-                     <div className="flex items-center gap-3 p-2 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
+                     <div className="flex items-center gap-3 px-2 py-1 sm:p-4 bg-gray-900/70 rounded-xl backdrop-blur-lg border border-green-500/30 shadow-lg">
                       <div className="text-xl">✅</div>
                       <p className="text-sm text-gray-300 leading-relaxed">
                         이 강의의 하나로 평생 써먹는 스킬 확보
