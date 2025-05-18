@@ -148,7 +148,7 @@ export default function MainUpsellPage() {
                 <ul className="mt-3 text-gray-300 text-sm space-y-3">
                   <li>
                     <span className="font-semibold text-purple-300">✅ 1:1 카카오톡 Q&A 핫라인 (무제한)</span>
-                    <p className="mt-1">"개발하다 막히면 바로 톡 주세요. 최대한 실시간으로 응답드려요."</p>
+                    <p className="mt-1">&quot;개발하다 막히면 바로 톡 주세요. 최대한 실시간으로 응답드려요.&quot;</p>
                     <ul className="mt-1 ml-4 space-y-1 text-gray-400">
                       <li>👉 개인 카톡 공개, 실전 상황에서 바로 물어보고 바로 피드백 받는 채널</li>
                       <li>👉 클라이언트랑 대화 꼬였다?</li>
