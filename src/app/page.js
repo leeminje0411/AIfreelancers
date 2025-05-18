@@ -78,7 +78,7 @@ export default function Home() {
     <div className="min-h-screen bg-gray-900 text-white overflow-hidden">
       <div className="relative z-10">
         {/* Hero Section */}
-        <div className="relative pt-5 pb-2 sm:pt-14 sm:pb-6 px-4">
+        <div className="relative pt-5 pb-5 sm:pt-14 sm:pb-6 px-4">
           {/* Background Image and Overlay */}
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97')] bg-cover bg-center opacity-40"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-purple-800/70 to-blue-800/70"></div> {/* Gradient overlay */}
@@ -220,7 +220,7 @@ export default function Home() {
         </div>
 
         {/* Course Features */}
-        <div className="py-16 sm:py-24 px-4 bg-gray-800/50">
+        <div className="py-7 sm:py-24 px-4 bg-gray-800/50">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400 drop-shadow-md">
               AI 웹사이트 개발 및 수익 창출<br/>핵심 커리큘럼
@@ -230,7 +230,7 @@ export default function Home() {
                 <div className="text-4xl mb-6">🤖</div>
                 <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-white">AI 기반 개발</h3>
                 <p className="text-gray-300 text-base">
-                  ChatGPT, Midjourney 등 최신 AI 도구를 활용하여<br />
+                  최신 AI 도구인 Cursor를 활용하여<br />
                   웹사이트 개발 생산성을 극대화합니다.
                 </p>
               </div>
@@ -310,8 +310,9 @@ export default function Home() {
         {/* Footer */}
         <footer className="py-8 px-4 text-center text-gray-500 text-sm">
           <div className="max-w-7xl mx-auto">
-            <p>&copy; 2023 AI Website Class. All rights reserved.</p>
-            <p className="mt-2">본 페이지는 강의 홍보를 위해 제작된 예시 페이지입니다.</p>
+            <p>&copy; 2023 AI-fleelancers Class. All rights reserved.</p>
+            <p className="mt-2">본 페이지 또한  Cursor AI로 </p>
+            <p>코드 한 줄 치지 않고 제작한 페이지입니다.</p>
           </div>
       </footer>
       </div>
