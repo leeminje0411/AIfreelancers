@@ -516,26 +516,6 @@ export default function AdminPage() {
     setSavingProgress(false);
   };
 
-  if (loading) {
-    return <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">로딩 중...</div>;
-  }
-
-  if (error) {
-    return <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">오류: {error}</div>;
-  }
-
-  // 데이터가 비어있는 경우
-  if (!orders || orders.length === 0) {
-      return (
-        <div className="min-h-screen bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-           <div className="max-w-7xl mx-auto">
-             <h1 className="text-3xl font-bold text-white mb-8">관리자 페이지 - 주문 목록</h1>
-             <div className="text-center text-gray-400">아직 신청된 주문이 없습니다.</div>
-           </div>
-        </div>
-      );
-  }
-
   return (
     <div className="min-h-screen bg-gray-900 text-white p-4 sm:p-8">
       <div className="max-w-7xl mx-auto">
@@ -543,7 +523,6 @@ export default function AdminPage() {
           관리자 대시보드
         </h1>
 
-        {/* Tab Navigation */}
         <div className="flex flex-wrap gap-2 mb-8 justify-center">
           <button
             onClick={() => setActiveTab('orders')}
@@ -553,7 +532,7 @@ export default function AdminPage() {
                 : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
             }`}
           >
-            신청 리스트
+            신청 리스트 ({loading ? '' : orders.length})
           </button>
           <button
             onClick={() => setActiveTab('earlyAccess')}
@@ -607,138 +586,149 @@ export default function AdminPage() {
           </button>
         </div>
 
-        {/* Tab Content */}
         <div className="bg-gray-800 rounded-xl p-4 sm:p-6 shadow-xl">
           {activeTab === 'orders' && (
             <>
-              {/* 정렬 옵션과 작업 버튼 */}
-              <div className="mb-4 flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <span className="text-gray-300">정렬 기준:</span>
-                  <button
-                    onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-                    className="px-4 py-2 bg-gray-700/50 text-white rounded-md hover:bg-gray-600/50 transition-colors"
-                  >
-                    신청 시각 ({sortOrder === 'asc' ? '오래된순' : '최신순'})
-                  </button>
-                </div>
-                <div className="flex items-center gap-4">
-                  <button
-                    onClick={handleSelectAll}
-                    className="px-4 py-2 bg-gray-700/50 text-white rounded-md hover:bg-gray-600/50 transition-colors"
-                  >
-                    {selectedOrders.length === orders.length ? '전체 해제' : '전체 선택'}
-                  </button>
-                  <button
-                    onClick={handleCompletePayment}
-                    disabled={isProcessing || selectedOrders.length === 0}
-                    className={`px-4 py-2 rounded-md text-white transition-colors ${
-                      isProcessing || selectedOrders.length === 0
-                        ? 'bg-gray-600 cursor-not-allowed'
-                        : 'bg-green-600 hover:bg-green-700'
-                    }`}
-                  >
-                    {isProcessing ? '처리 중...' : '결제 완료 처리'}
-                  </button>
-                  <button
-                    onClick={handleDeleteOrders}
-                    disabled={isProcessing || selectedOrders.length === 0}
-                    className={`px-4 py-2 rounded-md text-white transition-colors ${
-                      isProcessing || selectedOrders.length === 0
-                        ? 'bg-gray-600 cursor-not-allowed'
-                        : 'bg-red-600 hover:bg-red-700'
-                    }`}
-                  >
-                    {isProcessing ? '처리 중...' : '선택 삭제'}
-                  </button>
-                </div>
-              </div>
+              {loading ? (
+                 <div className="text-center py-8">
+                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto"></div>
+                   <p className="mt-4 text-gray-400">주문 정보를 불러오는 중...</p>
+                 </div>
+              ) : error ? (
+                 <div className="text-center py-8 text-red-500">오류: {error}</div>
+              ) : orders.length === 0 ? (
+                 <div className="text-center text-gray-400 py-8">아직 신청된 주문이 없습니다.</div>
+              ) : (
+                 <>
+                   <div className="mb-4 flex items-center justify-between">
+                     <div className="flex items-center gap-4">
+                       <span className="text-gray-300">정렬 기준:</span>
+                       <button
+                         onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+                         className="px-4 py-2 bg-gray-700/50 text-white rounded-md hover:bg-gray-600/50 transition-colors"
+                       >
+                         신청 시각 ({sortOrder === 'asc' ? '오래된순' : '최신순'})
+                       </button>
+                     </div>
+                     <div className="flex items-center gap-4">
+                       <button
+                         onClick={handleSelectAll}
+                         className="px-4 py-2 bg-gray-700/50 text-white rounded-md hover:bg-gray-600/50 transition-colors"
+                       >
+                         {selectedOrders.length === orders.length ? '전체 해제' : '전체 선택'}
+                       </button>
+                       <button
+                         onClick={handleCompletePayment}
+                         disabled={isProcessing || selectedOrders.length === 0}
+                         className={`px-4 py-2 rounded-md text-white transition-colors ${
+                           isProcessing || selectedOrders.length === 0
+                             ? 'bg-gray-600 cursor-not-allowed'
+                             : 'bg-green-600 hover:bg-green-700'
+                         }`}
+                       >
+                         {isProcessing ? '처리 중...' : '결제 완료 처리'}
+                       </button>
+                       <button
+                         onClick={handleDeleteOrders}
+                         disabled={isProcessing || selectedOrders.length === 0}
+                         className={`px-4 py-2 rounded-md text-white transition-colors ${
+                           isProcessing || selectedOrders.length === 0
+                             ? 'bg-gray-600 cursor-not-allowed'
+                             : 'bg-red-600 hover:bg-red-700'
+                         }`}
+                       >
+                         {isProcessing ? '처리 중...' : '선택 삭제'}
+                       </button>
+                     </div>
+                   </div>
 
-              <div className="bg-gray-800/70 backdrop-blur-lg p-6 rounded-xl shadow-2xl overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-700">
-                  <thead>
-                    <tr>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                        <input
-                          type="checkbox"
-                          checked={selectedOrders.length === orders.length}
-                          onChange={handleSelectAll}
-                          className="rounded border-gray-600 text-purple-600 focus:ring-purple-500"
-                        />
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">순서</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">이름</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">이메일</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">전화번호</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">입금 완료</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">최종 완료</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">신청 시각</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">주문 상품</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">총 결제 금액</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-800">
-                    {orders.map((order, index) => {
-                      const totalAmount = order.order_items.reduce((sum, item) => {
-                        const price = parseFloat(item.products?.price);
-                        return sum + (isNaN(price) ? 0 : price * item.quantity);
-                      }, 0);
-                      const formattedTotal = totalAmount.toLocaleString() + '원';
+                   <div className="bg-gray-800/70 backdrop-blur-lg p-6 rounded-xl shadow-2xl overflow-x-auto">
+                     <table className="min-w-full divide-y divide-gray-700">
+                       <thead>
+                         <tr>
+                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                             <input
+                               type="checkbox"
+                               checked={selectedOrders.length === orders.length}
+                               onChange={handleSelectAll}
+                               className="rounded border-gray-600 text-purple-600 focus:ring-purple-500"
+                             />
+                           </th>
+                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">순서</th>
+                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">이름</th>
+                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">이메일</th>
+                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">전화번호</th>
+                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">입금 완료</th>
+                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">최종 완료</th>
+                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">신청 시각</th>
+                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">주문 상품</th>
+                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">총 결제 금액</th>
+                         </tr>
+                       </thead>
+                       <tbody className="divide-y divide-gray-800">
+                         {orders.map((order, index) => {
+                           const totalAmount = order.order_items.reduce((sum, item) => {
+                             const price = parseFloat(item.products?.price);
+                             return sum + (isNaN(price) ? 0 : price * item.quantity);
+                           }, 0);
+                           const formattedTotal = totalAmount.toLocaleString() + '원';
 
-                      return (
-                        <tr key={order.id} className={selectedOrders.includes(order.id) ? 'bg-gray-700/50' : ''}>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <input
-                              type="checkbox"
-                              checked={selectedOrders.includes(order.id)}
-                              onChange={() => handleOrderSelect(order.id)}
-                              className="rounded border-gray-600 text-purple-600 focus:ring-purple-500"
-                            />
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{index + 1}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{order.name}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{order.email}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{order.phone}</td>
-                          <td className={`px-6 py-4 whitespace-nowrap text-sm font-semibold ${order.is_completed ? 'text-green-500' : 'text-yellow-500'}`}>
-                            {order.is_completed ? '완료' : '미완료'}
-                          </td>
-                          <td className={`px-6 py-4 whitespace-nowrap text-sm font-semibold ${order.final_completed ? 'text-green-500' : 'text-yellow-500'}`}>
-                            {order.final_completed ? '완료' : '미완료'}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
-                            {(() => {
-                              const date = new Date(order.created_at);
-                              const now = new Date();
-                              const isCurrentYear = date.getFullYear() === now.getFullYear();
-                              
-                              return date.toLocaleString('ko-KR', {
-                                year: isCurrentYear ? undefined : 'numeric',
-                                month: '2-digit',
-                                day: '2-digit',
-                                hour: '2-digit',
-                                minute: '2-digit',
-                                hour12: false
-                              });
-                            })()}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                            {order.order_items && order.order_items.length > 0 ? (
-                              <ul className="list-disc list-inside">
-                                {order.order_items.map((item, itemIndex) => (
-                                  <li key={itemIndex}>{item.products?.name} (수량: {item.quantity})</li>
-                                ))}
-                              </ul>
-                            ) : (
-                              '상품 없음'
-                            )}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-purple-400">{formattedTotal}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
+                           return (
+                             <tr key={order.id} className={selectedOrders.includes(order.id) ? 'bg-gray-700/50' : ''}>
+                               <td className="px-6 py-4 whitespace-nowrap">
+                                 <input
+                                   type="checkbox"
+                                   checked={selectedOrders.includes(order.id)}
+                                   onChange={() => handleOrderSelect(order.id)}
+                                   className="rounded border-gray-600 text-purple-600 focus:ring-purple-500"
+                                 />
+                               </td>
+                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{index + 1}</td>
+                               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{order.name}</td>
+                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{order.email}</td>
+                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{order.phone}</td>
+                               <td className={`px-6 py-4 whitespace-nowrap text-sm font-semibold ${order.is_completed ? 'text-green-500' : 'text-yellow-500'}`}>
+                                 {order.is_completed ? '완료' : '미완료'}
+                               </td>
+                               <td className={`px-6 py-4 whitespace-nowrap text-sm font-semibold ${order.final_completed ? 'text-green-500' : 'text-yellow-500'}`}>
+                                 {order.final_completed ? '완료' : '미완료'}
+                               </td>
+                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                                 {(() => {
+                                   const date = new Date(order.created_at);
+                                   const now = new Date();
+                                   const isCurrentYear = date.getFullYear() === now.getFullYear();
+                                   
+                                   return date.toLocaleString('ko-KR', {
+                                     year: isCurrentYear ? undefined : 'numeric',
+                                     month: '2-digit',
+                                     day: '2-digit',
+                                     hour: '2-digit',
+                                     minute: '2-digit',
+                                     hour12: false
+                                   });
+                                 })()}
+                               </td>
+                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                                 {order.order_items && order.order_items.length > 0 ? (
+                                   <ul className="list-disc list-inside">
+                                     {order.order_items.map((item, itemIndex) => (
+                                       <li key={itemIndex}>{item.products?.name} (수량: {item.quantity})</li>
+                                     ))}
+                                   </ul>
+                                 ) : (
+                                   '상품 없음'
+                                 )}
+                               </td>
+                               <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-purple-400">{formattedTotal}</td>
+                             </tr>
+                           );
+                         })}
+                       </tbody>
+                     </table>
+                   </div>
+                 </>
+              )}
             </>
           )}
 
@@ -746,7 +736,6 @@ export default function AdminPage() {
             <div className="bg-gray-800/70 backdrop-blur-lg p-6 rounded-xl shadow-2xl">
               <h2 className="text-xl font-bold text-white mb-4">선착순 정보 설정</h2>
               
-              {/* 현재 설정 값 표시 */}
               {(earlyAccessLimit !== null || displayApplicantCount !== null) && (
                 <div className="flex flex-col gap-2 mb-4">
                   {earlyAccessLimit !== null && (
@@ -758,7 +747,6 @@ export default function AdminPage() {
                 </div>
               )}
 
-              {/* 설정 값 수정 입력 필드 */}
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-4">
                   <label htmlFor="newMaxCount" className="text-gray-300 w-32">전체 선착순 인원:</label>
@@ -889,7 +877,6 @@ export default function AdminPage() {
                 방문자 통계
               </h2>
               
-              {/* 총 방문자 수 표시 */}
               <div className="bg-gray-700/50 p-4 rounded-lg shadow-md mb-6 flex items-center justify-between">
                   <span className="text-gray-300 font-semibold text-lg">총 고유 방문자</span>
                   {loadingTotalVisitors ? (
@@ -899,7 +886,6 @@ export default function AdminPage() {
                   )}
               </div>
 
-              {/* 일간 방문자 통계 테이블 */}
               <h3 className="text-xl font-bold mb-4 text-gray-300">최근 30일 일간 순 방문자</h3>
 
               {loadingVisitors ? (

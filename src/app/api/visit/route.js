@@ -4,7 +4,7 @@ import { supabase } from '@/utils/supabase';
 import { v4 as uuidv4 } from 'uuid';
 
 export async function GET(request) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const visitorId = cookieStore.get('visitorId');
   const lastVisitDate = cookieStore.get('lastVisitDate');
   const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD 형식
@@ -20,7 +20,7 @@ export async function GET(request) {
 
   // visitorId 쿠키 설정 (영구적 또는 장기)
   // 이미 쿠키가 있더라도 갱신하여 maxAge를 연장합니다.
-  cookieStore.set('visitorId', currentVisitorId, { 
+  await cookieStore.set('visitorId', currentVisitorId, { 
       httpOnly: true, // JavaScript에서 접근 불가
       secure: process.env.NODE_ENV === 'production', // HTTPS에서만 전송
       maxAge: 60 * 60 * 24 * 365 * 10, // 10년 유효
@@ -31,7 +31,7 @@ export async function GET(request) {
   // lastVisitDate 쿠키 설정 (오늘 날짜, 하루 유효)
   // 오늘 첫 방문인 경우에만 설정하여 내일 초기화되도록 합니다.
   if (isFirstVisitToday) {
-      cookieStore.set('lastVisitDate', today, {
+      await cookieStore.set('lastVisitDate', today, {
           httpOnly: true,
           secure: process.env.NODE_ENV === 'production',
           maxAge: 60 * 60 * 24, // 24시간 유효
