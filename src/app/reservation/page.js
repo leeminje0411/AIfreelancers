@@ -13,17 +13,21 @@ export default function ReservationPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: 폼 제출 로직 구현
-    console.log('Form submitted:', formData);
-    alert('사전예약 신청이 완료되었습니다!'); // 임시 알림
-    // 폼 데이터 초기화
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      course: 'AI 웹개발로 수익화 강의',
-      upsellPackageSelected: false,
-    });
+    
+    // 필수 입력 필드 검증
+    if (!formData.name || !formData.email) {
+      // 필수 입력 필드가 비어있으면 해당 필드로 스크롤
+      const emptyField = !formData.name ? 'name' : 'email';
+      const element = document.getElementById(emptyField);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        element.focus();
+      }
+      return;
+    }
+
+    // 메인 업셀 페이지로 이동하면서 미니 업셀 선택 상태 전달
+    window.location.href = `/reservation/main-upsell?miniUpsell=${formData.upsellPackageSelected}`;
   };
 
   const handleChange = (e) => {
@@ -35,13 +39,13 @@ export default function ReservationPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white overflow-hidden relative">
+    <div className="min-h-screen bg-gray-900 text-white relative">
        {/* Background Overlay or Image */}
        <div className="absolute inset-0 bg-[url('/images/profile.jpg')] bg-cover bg-center opacity-10"></div> {/* Example using the image */}
        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/70 to-blue-900/70"></div> {/* Dark Gradient Overlay */}
 
 
-      <div className="relative z-10 max-w-2xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-2xl mx-auto py-12 px-4 sm:px-6 lg:px-8 pb-24">
         <div className="text-center mb-8">
           {/* Profile Image as Logo */}
           <img 
@@ -158,29 +162,30 @@ export default function ReservationPage() {
               </div>
             </div>
           </div>
-
-          <div>
-            {/* Calculate Total Price */}
-            {(() => {
-              const basePrice = 160000;
-              const upsellPrice = 39000;
-              const total = basePrice + (formData.upsellPackageSelected ? upsellPrice : 0);
-              const formattedTotal = total.toLocaleString(); // Format with commas
-
-              return (
-                <button
-                  type="submit"
-                  className="w-full flex flex-col items-center justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-300 transform hover:scale-105"
-                >
-                  <span className="text-xl sm:text-2xl font-extrabold mb-1">
-                     총 결제 금액: <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-blue-300 drop-shadow-md">{formattedTotal}원</span>
-                  </span>
-                  <span className="text-sm sm:text-base text-white/90">지금 바로 사전예약하기</span>
-                </button>
-              );
-            })()}
-          </div>
         </form>
+
+        {/* Calculate Total Price and Fixed Button - MOVED OUTSIDE FORM */}
+        {(() => {
+          const basePrice = 160000;
+          const upsellPrice = 39000;
+          const total = basePrice + (formData.upsellPackageSelected ? upsellPrice : 0);
+          const formattedTotal = total.toLocaleString(); // Format with commas
+
+          return (
+            <div className="fixed bottom-0 left-0 right-0 bg-gray-800/90 backdrop-blur-lg py-3 px-4 z-50">
+              <button
+                onClick={handleSubmit}
+                className="w-full flex flex-col items-center justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-300 transform hover:scale-105"
+              >
+                <span className="text-xl sm:text-2xl font-extrabold mb-1">
+                   총 결제 금액: <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-blue-300 drop-shadow-md">{formattedTotal}원</span>
+                </span>
+                <span className="text-sm sm:text-base text-white/90">지금 바로 사전예약하기</span>
+              </button>
+            </div>
+          );
+        })()}
+
       </div>
     </div>
   );
