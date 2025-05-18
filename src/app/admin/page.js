@@ -165,14 +165,32 @@ export default function AdminPage() {
   const fetchVisitorStats = async () => {
     setLoadingVisitors(true);
     try {
+      // daily_visitor_log 테이블에서 날짜별 고유 방문자 수 계산
       const { data, error } = await supabase
-        .from('daily_visits')
-        .select('date, today_visits')
+        .from('daily_visitor_log')
+        .select('date, visitor_id')
         .order('date', { ascending: false })
         .limit(30); // 최근 30일 데이터만 표시
 
       if (error) throw error;
-      setVisitorStats(data || []);
+
+      // 날짜별로 방문자 수 집계
+      const statsByDate = data.reduce((acc, log) => {
+        const date = log.date;
+        if (!acc[date]) {
+          acc[date] = new Set();
+        }
+        acc[date].add(log.visitor_id);
+        return acc;
+      }, {});
+
+      // 집계된 데이터를 배열로 변환
+      const stats = Object.entries(statsByDate).map(([date, visitors]) => ({
+        date,
+        today_visits: visitors.size
+      }));
+
+      setVisitorStats(stats);
     } catch (error) {
       console.error('Error fetching daily visitor stats:', error);
     } finally {
@@ -183,23 +201,18 @@ export default function AdminPage() {
   const fetchTotalUniqueVisitors = async () => {
     setLoadingTotalVisitors(true);
     try {
+      // daily_visitor_log 테이블에서 전체 고유 방문자 수 계산
       const { data, error } = await supabase
-        .from('cumulative_visit_count')
-        .select('total_visits')
-        .eq('id', 1)
-        .single();
+        .from('daily_visitor_log')
+        .select('visitor_id');
 
-      if (error && error.code !== 'PGRST116') { // PGRST116은 데이터 없음을 의미
-        console.error('Error fetching total unique visitors:', error);
-        setTotalUniqueVisitors(0); // 오류 발생 시 0으로 설정
-      } else if (data) {
-        setTotalUniqueVisitors(data.total_visits);
-      } else {
-        setTotalUniqueVisitors(0); // 데이터가 없으면 0
-        console.warn('cumulative_visit_count table is empty or id=1 not found.');
-      }
+      if (error) throw error;
+
+      // 전체 고유 방문자 수 계산
+      const uniqueVisitors = new Set(data.map(log => log.visitor_id));
+      setTotalUniqueVisitors(uniqueVisitors.size);
     } catch (error) {
-      console.error('Unexpected error fetching total unique visitors:', error);
+      console.error('Error fetching total unique visitors:', error);
       setTotalUniqueVisitors(0);
     } finally {
       setLoadingTotalVisitors(false);
